@@ -7,10 +7,10 @@ description: "Use when a task requires an implementation plan: repeatedly add ma
 
 Use this skill when producing an implementation plan for a task.
 
-Use this in conjunction with `logic-patterns:plan-checklists` to persist, track, and lifecycle-checklist the plan you produce.
+Use this in conjunction with `development-patterns:plan-checklists` to persist, track, and lifecycle-checklist the plan you produce.
 
 Required skills:
-- `logic-patterns:plan-checklists` for plan file location, checklist structure, and closure/move rules.
+- `development-patterns:plan-checklists` for plan file location, checklist structure, and closure/move rules.
 
 Workflow:
 1. Draft an initial plan.

@@ -1,6 +1,6 @@
 ---
 name: "implement-plan"
-description: "Use when the user invokes `logic-patterns:implement-plan`, `$logic-patterns:implement-plan`, or asks to implement, continue, or finish an existing plan checklist end-to-end. Executes the plan through code changes, required SPEC.md alignment, GPT-5.5 medium implementation subagents, targeted validation, `$logic-patterns:adversary-loop`/`$logic-patterns:gaslight-loop` review loops, final build/e2e gates, and `$logic-patterns:plan-checklists` archival."
+description: "Use when the user invokes `development-patterns:implement-plan`, `$development-patterns:implement-plan`, or asks to implement, continue, or finish an existing plan checklist end-to-end. Executes the plan through code changes, required SPEC.md alignment, GPT-5.5 medium implementation subagents, targeted validation, `$logic-patterns:adversary-loop`/`$logic-patterns:gaslight-loop` review loops, final build/e2e gates, and `$development-patterns:plan-checklists` archival."
 ---
 
 # Implement Plan
@@ -14,11 +14,9 @@ Using this skill authorizes the workflow subagents described below unless the us
 ## Required Skills
 
 Load every applicable skill before implementation:
-- `logic-patterns:plan-checklists` for plan state and archival
-- `logic-patterns:spec-driven-development` for every affected `SPEC.md`
-- `integrii:go-coding-practices` for Go changes
-- `integrii:ts-coding-practices` for TypeScript changes
-- `logic-patterns:centralized-fix-selection` when choosing local vs shared fixes
+- `development-patterns:plan-checklists` for plan state and archival
+- `development-patterns:spec-driven-development` for every affected `SPEC.md`
+- `development-patterns:centralized-fix-selection` when choosing local vs shared fixes
 - `logic-patterns:adversary-loop` for the post-implementation review loop
 - `logic-patterns:gaslight-loop` for local iterative self-review and bug-fix verification
 
@@ -77,7 +75,7 @@ Only after the plan is fully implemented and the adversary-loop/gaslight-loop lo
 
 When implementation, adversary-loop review, and final gates are complete:
 
-1. Use `logic-patterns:plan-checklists`.
+1. Use `development-patterns:plan-checklists`.
 2. Check off every addressed plan item.
 3. Move the associated tracker issue to a review/completion state appropriate for the repo's policy; do not mark it fully complete unless the user explicitly approves.
 4. Archive the plan according to the active repository plan policy immediately after moving the issue to `In Review`, in the same closure step.

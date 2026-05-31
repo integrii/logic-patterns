@@ -1,0 +1,25 @@
+{
+  "name": "development-patterns",
+  "version": "1.0.0",
+  "description": "Reusable software development and implementation workflow skills for AI-agent execution.",
+  "author": {
+    "name": "integrii",
+    "email": "noreply@integrii.github.io",
+    "url": "https://github.com/integrii"
+  },
+  "homepage": "https://github.com/integrii/logic-patterns",
+  "repository": "https://github.com/integrii/logic-patterns",
+  "license": "MIT",
+  "keywords": ["implementation", "planning", "software", "workflows", "review"],
+  "skills": "./",
+  "interface": {
+    "displayName": "development-patterns",
+    "shortDescription": "Development workflow and implementation execution patterns.",
+    "longDescription": "A focused collection of engineering-oriented decision, planning, and execution workflows for implementation and system changes.",
+    "developerName": "integrii",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/integrii/logic-patterns",
+    "brandColor": "#0f766e"
+  }
+}

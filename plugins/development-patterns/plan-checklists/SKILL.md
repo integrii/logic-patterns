@@ -21,7 +21,7 @@ This skill reflects the common practice across the child service repositories:
 - Keep plans concise and task-oriented.
 - One active file should represent one active stream of work.
 - Update the checklist as work progresses; do not leave it stale.
-- If a plan is executed through `$logic-patterns:implement-plan`, track a single linked issue only in that workflow and do not create a second issue here.
+- If a plan is executed through `$development-patterns:implement-plan`, track a single linked issue only in that workflow and do not create a second issue here.
 - When starting a plan through that workflow, reference the associated tracker issue in the plan file.
 - Move finished, abandoned, or superseded plans to `.plans/$REPONAME/completed/YYYY-MM-DD/$PLANNAME` promptly.
 - Do not leave inactive plans sitting in the active `in-progress` queue.
@@ -66,7 +66,7 @@ Avoid:
 - revise the checklist as scope changes
 - mark items complete as the work lands
 - move the file to the matching completed bucket when the plan is done, abandoned, or replaced
-- when completed by `$logic-patterns:implement-plan`, archive only after every checklist item is addressed and the plan-linked tracker issue is moved to the appropriate review/completion state unless the user explicitly approved completion.
+- when completed by `$development-patterns:implement-plan`, archive only after every checklist item is addressed and the plan-linked tracker issue is moved to the appropriate review/completion state unless the user explicitly approved completion.
 
 ## Cross-Repo Note
 
@@ -77,5 +77,5 @@ If the workspace root has its own plan-storage policy, follow that policy for cr
 When you create or update a plan, report:
 - where the plan file lives
 - whether it is repo-local or cross-repo
-- whether the plan has a single plan-linked tracker issue and current issue state if managed by `$logic-patterns:implement-plan`
+- whether the plan has a single plan-linked tracker issue and current issue state if managed by `$development-patterns:implement-plan`
 - any required `ADR.md` / `SPEC.md` alignment that shaped the checklist
