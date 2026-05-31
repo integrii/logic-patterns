@@ -30,7 +30,7 @@ description: "Use when you need to convert session history into reusable, repo-s
 - If unique, add one narrowly-scoped skill with the same structure (macro + checklists only).
 
 ## Session Review Checklist
-- [ ] Identify at least 3 durable patterns from the session.
+- [ ] Identify durable patterns from the session.
 - [ ] Mark each as repeatable, repo-specific, and low-overlap.
 - [ ] Group overlapping findings; eliminate duplicates.
 - [ ] Update existing skills where domain already exists.
