@@ -34,20 +34,20 @@ codex plugin add development-patterns@development-patterns
 ## Plugin bundles
 
 ### logic-patterns
-- `1-3-1`
-- `adversary-loop`
-- `bifurcate`
-- `first-principles-rebuild`
-- `gaslight-loop`
-- `greyhat`
-- `make-a-plan`
-- `multidimensional-planning`
+- `bifurcate` — Split a complex problem into two choices, test one path deeply, then backtrack and test the other when needed.
+- `1-3-1` — Identify the problem well, propose 3 plausible solutions, analyze tradeoffs, and pick one path forward.
+- `first-principles-rebuild` — Rebuild the plan from first principles, then reconcile with what the current implementation requires.
+- `adversary-loop` — Run repeated adversarial reviews to find correctness gaps, regressions, and assumption failures.
+- `gaslight-loop` — Repeatedly inspect, identify, and fix defects until the implementation stabilizes under local checks.
+- `greyhat` — Challenge the solution from security, compliance, safety, and abuse perspectives before committing.
+- `make-a-plan` — Iteratively add missing critical details, then simplify while preserving outcomes and required fixes.
+- `multidimensional-planning` — Expand the plan one critical dimension at a time (flows, APIs, schema, scale, etc.) and tighten dependencies.
 
 ### development-patterns
-- `architecture-decision-records`
-- `architecture-spec`
-- `centralized-fix-selection`
-- `ephemeral-testing`
-- `implement-plan`
-- `plan-checklists`
-- `spec-driven-development`
+- `architecture-decision-records` — Manage long-lived design decisions in local ADRs.
+- `architecture-spec` — Enforce cross-repo/workspace architecture contracts and compatibility rules.
+- `centralized-fix-selection` — Decide whether fixes belong in shared abstractions or local call sites.
+- `ephemeral-testing` — Define reproducible local multi-service test-stack patterns.
+- `implement-plan` — Execute an existing plan end-to-end with validation and closure.
+- `plan-checklists` — Maintain plan lifecycle, tracking, and archival conventions.
+- `spec-driven-development` — Drive implementation from local SPEC.md behavior and boundaries.
