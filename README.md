@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo.png" alt="logic-patterns logo" width="240"/>
+  <img src="logo.png" alt="logic-patterns logo" width="380"/>
 </div>
 
 # logic-patterns
