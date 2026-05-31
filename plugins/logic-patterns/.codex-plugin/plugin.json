@@ -11,7 +11,7 @@
   "repository": "https://github.com/integrii/logic-patterns",
   "license": "MIT",
   "keywords": ["logic", "reasoning", "debate", "plans", "problem-solving"],
-  "skills": "./",
+  "skills": "./skills/",
   "interface": {
     "displayName": "logic-patterns",
     "shortDescription": "AI agent logic and decomposition strategies.",
@@ -20,6 +20,10 @@
     "category": "Productivity",
     "capabilities": ["Interactive", "Read", "Write"],
     "websiteURL": "https://github.com/integrii/logic-patterns",
+    "defaultPrompt": [
+      "Use a logic strategy to decompose a hard decision into candidates and pick one path.",
+      "How should I think through this problem before implementation?"
+    ],
     "brandColor": "#3b82f6"
   }
 }

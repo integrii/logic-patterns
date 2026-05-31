@@ -11,7 +11,7 @@
   "repository": "https://github.com/integrii/logic-patterns",
   "license": "MIT",
   "keywords": ["implementation", "planning", "software", "workflows", "review"],
-  "skills": "./",
+  "skills": "./skills/",
   "interface": {
     "displayName": "development-patterns",
     "shortDescription": "Development workflow and implementation execution patterns.",
@@ -20,6 +20,10 @@
     "category": "Productivity",
     "capabilities": ["Interactive", "Read", "Write"],
     "websiteURL": "https://github.com/integrii/logic-patterns",
+    "defaultPrompt": [
+      "I need an implementation plan and execution workflow for this change.",
+      "What sequence of changes should I execute to implement and verify this fix?"
+    ],
     "brandColor": "#0f766e"
   }
 }
