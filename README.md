@@ -17,20 +17,15 @@ This repository exposes two Codex plugins:
 - `logic-patterns`: Generic problem-solving and reasoning workflows for technologists.
 - `development-patterns`: Effective engineering, execution, and implementation workflows.
 
-### Install from a clean session
+### Install
 
 ```sh
-set -e
-cd /path/to/logic-patterns
-codex plugin remove logic-patterns@logic-patterns || true
-codex plugin remove development-patterns@logic-patterns || true
-codex plugin marketplace remove logic-patterns || true
-codex plugin marketplace add . || codex plugin marketplace add integrii/logic-patterns@main
+codex plugin marketplace add integrii/logic-patterns@main
+
+# Pick one plugin to install:
 codex plugin add logic-patterns@logic-patterns
 codex plugin add development-patterns@logic-patterns
 ```
-
-After running, restart Codex and run `/plugins` in a new session to verify both are enabled.
 
 ## Plugin bundles
 
