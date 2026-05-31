@@ -20,6 +20,9 @@ Use when multiple potential causes or factors interact and one path selection is
 ### first-principles-rebuild
 Use when a system should be reimplemented from its fundamentals instead of incremental patching. It extracts core behavior from `SPEC.md`, strips non-essential assumptions, then merges only truly required implementation constraints before producing a reimplementation plan.
 
+### session-review
+Use when a session contains recurring service-specific discovery that should be captured as reusable repo-specific skills, patterns, and checklists to avoid repeating setup and lookup work in future.
+
 ### gaslight-loop
 Use when code is believed incomplete or subtly buggy and you want a quick local validation loop. It repeatedly asks for bug-finding and focused re-checking on a small surface until no significant findings remain. This is useful for tightening implementation quality before broader review or release gates.
 
