@@ -29,7 +29,7 @@ codex plugin add development-patterns@logic-patterns
 
 ## Plugin bundles
 
-### logic-patterns
+### [logic-patterns](https://github.com/integrii/logic-patterns/tree/main/plugins/development-patterns/skills)
 - `bifurcate` — Split a complex problem into two choices, test one path deeply, then backtrack and test the other when needed.
 - `1-3-1` — Identify the problem well, propose 3 plausible solutions, analyze tradeoffs, and pick one path forward.
 - `first-principles-rebuild` — Rebuild the plan from first principles, then reconcile with what the current implementation requires.
@@ -39,7 +39,7 @@ codex plugin add development-patterns@logic-patterns
 - `make-a-plan` — Iteratively add missing critical details, then simplify while preserving outcomes and required fixes.
 - `multidimensional-planning` — Expand the plan one critical dimension at a time (flows, APIs, schema, scale, etc.) and tighten dependencies.
 
-### development-patterns
+### [development-patterns](https://github.com/integrii/logic-patterns/tree/main/plugins/development-patterns/skills)
 - `architecture-decision-records` — Manage long-lived design decisions in local ADRs.
 - `architecture-spec` — Enforce cross-repo/workspace architecture contracts and compatibility rules.
 - `centralized-fix-selection` — Decide whether fixes belong in shared abstractions or local call sites.
