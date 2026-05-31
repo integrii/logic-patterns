@@ -29,7 +29,7 @@ codex plugin add development-patterns@logic-patterns
 
 ## Plugin bundles
 
-### [logic-patterns](https://github.com/integrii/logic-patterns/tree/main/plugins/development-patterns/skills)
+### [logic-patterns](https://github.com/integrii/logic-patterns/tree/main/plugins/logic-patterns/skills)
 - `bifurcate` — Split a complex problem into two choices, test one path deeply, then backtrack and test the other when needed.
 - `1-3-1` — Identify the problem well, propose 3 plausible solutions, analyze tradeoffs, and pick one path forward.
 - `first-principles-rebuild` — Rebuild the plan from first principles, then reconcile with what the current implementation requires.
