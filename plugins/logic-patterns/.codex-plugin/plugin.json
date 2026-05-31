@@ -1,0 +1,25 @@
+{
+  "name": "logic-patterns",
+  "version": "1.0.0",
+  "description": "Reusable logic and implementation workflow skills for AI-agent problem solving.",
+  "author": {
+    "name": "integrii",
+    "email": "noreply@integrii.github.io",
+    "url": "https://github.com/integrii"
+  },
+  "homepage": "https://github.com/integrii/logic-patterns",
+  "repository": "https://github.com/integrii/logic-patterns",
+  "license": "MIT",
+  "keywords": ["logic", "agent", "plans", "workflows", "review"],
+  "skills": "./",
+  "interface": {
+    "displayName": "logic-patterns",
+    "shortDescription": "AI agent logic and implementation strategies.",
+    "longDescription": "A plugin collection of reusable decision, planning, review, and architecture patterns for AI agent workflows.",
+    "developerName": "integrii",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/integrii/logic-patterns",
+    "brandColor": "#3b82f6"
+  }
+}
