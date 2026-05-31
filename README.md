@@ -38,6 +38,7 @@ codex plugin add development-patterns@logic-patterns
 - `greyhat` — Challenge the solution from security, compliance, safety, and abuse perspectives before committing.
 - `make-a-plan` — Iteratively add missing critical details, then simplify while preserving outcomes and required fixes.
 - `multidimensional-planning` — Expand the plan one critical dimension at a time (flows, APIs, schema, scale, etc.) and tighten dependencies.
+- `session-review` — Convert session discoveries into reusable, repo-specific skill patterns and checklists to avoid future rediscovery.
 
 ### [development-patterns](https://github.com/integrii/logic-patterns/tree/main/plugins/development-patterns/skills)
 - `architecture-decision-records` — Manage long-lived design decisions in local ADRs.
