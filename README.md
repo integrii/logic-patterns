@@ -28,7 +28,7 @@ codex plugin add logic-patterns@logic-patterns
 
 ```sh
 codex plugin marketplace add integrii/logic-patterns
-codex plugin add development-patterns@development-patterns
+codex plugin add development-patterns@logic-patterns
 ```
 
 ## Plugin bundles
