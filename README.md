@@ -1,5 +1,7 @@
 <div align="center">
   <img src="plugins/logic-patterns/logo.png" alt="logic-patterns logo" width="420"/>
+  <br/>
+  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://skills.sh/b/integrii/logic-patterns" alt="skills.sh"/></a>
 </div>
 
 # logic-patterns
