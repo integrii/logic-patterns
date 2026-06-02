@@ -1,7 +1,7 @@
 <div align="center">
   <img src="plugins/logic-patterns/logo.png" alt="logic-patterns logo" width="420"/>
   <br/>
-  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://skills.sh/b/integrii/logic-patterns" alt="skills.sh"/></a>
+  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-16%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
 </div>
 
 # logic-patterns
