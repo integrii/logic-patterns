@@ -20,6 +20,9 @@ Use when deciding whether a behavior change belongs in shared policy, abstractio
 ### ephemeral-testing
 Use when implementation depends on a full local service graph with realistic integration behavior. It sets norms around namespacing, shared dependencies, readiness, and teardown so test environments stay reproducible. This is useful for reducing flaky local validation and making e2e debugging more deterministic.
 
+### github-release-builds
+Use when adding release automation that builds multi-arch container images from semver tags in GitHub Actions. It defines the GHCR image pattern, tag-triggered release workflow, manifest update step, release asset, validation checks, and `RELEASE.md` documentation.
+
 ### implement-plan
 Use when a concrete implementation plan already exists and must be executed to completion. It enforces plan checkpoints, spec alignment, staged review, targeted validation, and closure. This is useful for turning intentions into a disciplined execution flow with explicit quality gates.
 
