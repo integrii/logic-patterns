@@ -222,25 +222,23 @@ jobs:
 
       - name: Create release notes
         run: |
-          cat > release-images.txt <<EOF
-          Image: ${IMAGE_TAG}
-          Platforms: linux/amd64, linux/arm64
-          GitHub Package: ${PACKAGE_URL}
-          EOF
+          {
+            echo "Image: ${IMAGE_TAG}"
+            echo "Tag: ${GITHUB_REF_NAME}"
+            echo "Platforms: linux/amd64, linux/arm64"
+            echo "GitHub Package: ${PACKAGE_URL}"
+          } > release-images.txt
 
-          cat > release-notes.md <<EOF
-          Container images were published for this release.
-
-          - Image: `${IMAGE_TAG}`
-          - Platforms: `linux/amd64`, `linux/arm64`
-          - GitHub Package: ${PACKAGE_URL}
-
-          The example healthcheck manifest on `main` was updated to use this image tag.
-
-          ```sh
-          docker pull ${IMAGE_TAG}
-          ```
-          EOF
+          {
+            echo "Container image published for this release."
+            echo
+            echo "- Image: ${IMAGE_TAG}"
+            echo "- Tag: ${GITHUB_REF_NAME}"
+            echo
+            echo "Pull:"
+            echo
+            echo "    docker pull ${IMAGE_TAG}"
+          } > release-notes.md
 
       - name: Create GitHub release
         env:
@@ -257,6 +255,8 @@ jobs:
 Replace `REPO\-NAME` with the escaped repository name and `file: ./Containerfile` as needed.
 
 Never use `git add '*.yaml' '*.yml'`; it fails when one glob has no matches.
+
+Do not put Markdown backticks in an unquoted shell heredoc for release notes. Shell command substitution will execute text inside backticks and can paste `docker pull` logs into the release body. Prefer the `echo` block above.
 
 ## RELEASE.md Template
 
