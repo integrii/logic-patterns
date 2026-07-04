@@ -1,7 +1,7 @@
 <div align="center">
   <img src="plugins/logic-patterns/logo.png" alt="logic-patterns logo" width="420"/>
   <br/>
-  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-16%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
+  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-17%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
 </div>
 
 # logic-patterns
@@ -44,6 +44,9 @@ Bifurcate splits a complex issue into exactly two competing branches, chooses th
 
 #### first-principles-rebuild
 First-principles-rebuild starts from the repository specification and extracts the fundamental outcomes, invariants, authorities, transitions, and safety boundaries. It removes implementation-shaped assumptions, then inspects the existing system only for constraints that are truly binding. It classifies what to keep, remove, or replace, then hands that simplified target model into a concrete reimplementation plan.
+
+#### five-whys
+Five-whys investigates the full problem space before asking five explicit why prompts. It answers each why with evidence, resolves or bounds unknowns before moving deeper, and finishes with five `Because` bullets that connect each cause to the prior answer.
 
 #### session-review
 Session-review turns repeated session discoveries into durable, reusable skill guidance instead of leaving them buried in chat history. It records what lookup or decision path was useful, why it mattered, and whether it belongs in an existing skill or a new narrow skill. It keeps only repeatable patterns and checklists, avoiding hardcoded examples or one-off session details.

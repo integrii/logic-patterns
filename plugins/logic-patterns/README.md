@@ -20,6 +20,9 @@ Bifurcate splits a complex issue into exactly two competing branches, chooses th
 ### first-principles-rebuild
 First-principles-rebuild starts from the repository specification and extracts the fundamental outcomes, invariants, authorities, transitions, and safety boundaries. It removes implementation-shaped assumptions, then inspects the existing system only for constraints that are truly binding. It classifies what to keep, remove, or replace, then hands that simplified target model into a concrete reimplementation plan.
 
+### five-whys
+Five-whys investigates the full problem space before asking five explicit why prompts. It answers each why with evidence, resolves or bounds unknowns before moving deeper, and finishes with five `Because` bullets that connect each cause to the prior answer.
+
 ### session-review
 Session-review turns repeated session discoveries into durable, reusable skill guidance instead of leaving them buried in chat history. It records what lookup or decision path was useful, why it mattered, and whether it belongs in an existing skill or a new narrow skill. It keeps only repeatable patterns and checklists, avoiding hardcoded examples or one-off session details.
 
