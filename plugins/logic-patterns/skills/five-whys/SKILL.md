@@ -1,6 +1,6 @@
 ---
 name: five-whys
-description: "Use when investigating root cause with the Five Whys method: gather evidence across the full problem space, ask five explicit why questions in sequence, explain each step simply, and return five Because bullets that connect each cause to the prior answer."
+description: "Use when investigating root cause with the Five Whys method: gather evidence across the full problem space, ask five explicit why questions in sequence, and answer each why with a Because line that connects each cause to the prior answer."
 ---
 
 # Five Whys
@@ -25,10 +25,10 @@ Find a useful root cause by investigating the problem space first, then asking w
 3. Stop after exactly five why prompts.
    - If a branch is weak, say what evidence is missing.
    - Do not keep asking extra whys in the final structure.
-4. Return the final causal chain as exactly five bullet points.
-   - Each bullet must start with `Because`.
-   - Each bullet answers why the bullet above happened.
-   - The first bullet answers why the original problem happened.
+4. Return the final causal chain as exactly five why sections.
+   - Each section starts with `Why N:`.
+   - Each answer line starts with `Because:`.
+   - Do not add summary bullets after the five why sections.
 
 ## Guardrails
 - Do not start with guesses. Investigate enough to ground the first why.
@@ -43,23 +43,17 @@ Use this shape:
 
 ```text
 Why 1: Why did <problem> happen?
-<simple explanation>
+Because: <answer to why 1>.
 
 Why 2: Why did <answer 1> happen?
-<simple explanation>
+Because: <answer to why 2>.
 
 Why 3: Why did <answer 2> happen?
-<simple explanation>
+Because: <answer to why 3>.
 
 Why 4: Why did <answer 3> happen?
-<simple explanation>
+Because: <answer to why 4>.
 
 Why 5: Why did <answer 4> happen?
-<simple explanation>
-
-- Because <answer to why 1>.
-- Because <answer to why 2>.
-- Because <answer to why 3>.
-- Because <answer to why 4>.
-- Because <answer to why 5>.
+Because: <answer to why 5>.
 ```
