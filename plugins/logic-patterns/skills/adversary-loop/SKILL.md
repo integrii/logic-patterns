@@ -13,7 +13,7 @@ Trigger cases:
 Workflow:
 1. Identify the review surface before delegating. Prefer the current diff, the last-turn edits, the active plan, or the files named by the user.
 2. Load the governing instructions for that surface first. Read the relevant `AGENTS.md`, `SPEC.md`, `ADR.md`, or task-specific contract docs when they materially constrain correctness.
-3. If subagents are available, spawn one review-focused subagent using the 5.5 high model.
+3. If subagents are available, spawn one review-focused subagent using the model configured for the current session.
 4. Give the reviewer a narrow adversarial brief:
    - prefer simpler correct solutions
    - find bugs, regressions, and incomplete work
@@ -30,7 +30,7 @@ Loop rules:
 - Treat "clean", "no findings", or only insignificant style nits as the stop condition.
 - If a reviewer reports both significant and insignificant findings, fix the significant valid findings and continue the loop.
 - If a finding is invalid, explain why in the next reviewer brief and continue only when unresolved significant findings remain.
-- Each pass should use a fresh review-focused 5.5 high subagent when subagents are available; do not ask the same reviewer to approve its own prior output.
+- Each pass should use a fresh review-focused subagent when subagents are available; do not ask the same reviewer to approve its own prior output.
 
 Plan review rules:
 - If the review surface is a plan, apply the same repeated fresh-subagent loop until no significant plan findings remain.
