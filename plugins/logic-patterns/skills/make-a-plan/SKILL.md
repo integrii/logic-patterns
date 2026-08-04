@@ -16,6 +16,8 @@ Required skills:
 
 Before planning, read applicable `AGENTS.md`, `SPEC.md`, `ADR.md`, and authoritative project documentation. If a material unknown could change the plan's outcome, ask for clarification. Otherwise state the assumption.
 
+Create the plan with one of these models: 5.6 Terra medium, 5.6 Terra high, 5.6 Sol medium, or 5.6 Sol high. Choose the model according to the plan's sensitivity and complexity. Use a medium model for routine, bounded work. Use a high model for sensitive, ambiguous, cross-service, security-critical, migration, or otherwise high-complexity work. Select Terra or Sol according to the applicable planning and review policy.
+
 Workflow:
 1. Frame the problem before drafting: state the goal, knowns, unknowns, assumptions, constraints, risks, success criteria, and non-goals.
 2. Draft an initial plan.

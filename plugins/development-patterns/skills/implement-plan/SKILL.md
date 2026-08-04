@@ -47,6 +47,22 @@ If two or more local plugin skills need non-trivial coordination, coordinate dep
    - focused type checks, linters, or route tests when they are the smallest useful signal
 9. Do not run `just build` or `just e2e` until the plan is fully implemented and targeted validation is passing or any failures are understood.
 
+## Batch LAN Validation
+
+When the plan includes LAN validation, especially UX or visual review, use a batch-first discovery loop:
+
+1. Run one candidate in a session-scoped Golden Stack. Use port-forwarding to open the UI and log in with an ephemeral account for validation. Inspect every reachable required state before editing again. Include all planned steps, branches, success and error states, desktop and 390px layouts, keyboard or accessibility behavior, and the primary and secondary actions.
+2. Keep a concrete finding ledger with the state, evidence, severity, user impact, and proposed fix. Continue the discovery pass after the first finding. Do not stop validation to fix an isolated issue when other required states remain reachable.
+3. Batch all significant findings from that candidate into one coherent implementation slice. Fix related UI, behavior, copy, and test coverage together when they share the same flow or release scope.
+4. Run focused checks on the batch, then build, run the required LAN gate, and perform one new visual discovery pass. Do not ship a new candidate for each individual cosmetic or UX finding.
+5. Repeat the batch cycle until the finding ledger has no significant unresolved issues. Record non-critical findings that are intentionally deferred and why.
+
+## UX Quality Gate
+
+Run this gate for every plan that changes a user-facing UI. Run it after implementation and targeted tests, before the adversarial review loop.
+
+Run the gate with a 5.6 Sol medium reviewer, a 5.6 Terra planner, and a 5.6 Luna implementer. The Sol reviewer evaluates the rendered result and acceptance criteria. The Terra planner identifies required UX corrections and validation. The Luna implementer applies the agreed fixes and reruns the smallest relevant UI check.
+
 ## Review Loop
 
 After plan implementation is complete and before final build/e2e gates, run iterative review:
