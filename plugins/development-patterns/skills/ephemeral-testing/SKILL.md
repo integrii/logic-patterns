@@ -11,7 +11,7 @@ Use this skill when you need a full local service graph available for end-to-end
 
 The test stack is a reusable, deterministic containerized environment that represents the standard local test network for the product:
 
-- one shared infra layer (datastores, caches, queues, shared services),
+- one Codex-session-scoped infra layer (datastores, caches, queues, shared services),
 - one test target service image override per run,
 - one reproducible network namespace and service discovery plan,
 - one cleanup policy to avoid environment drift.
@@ -20,18 +20,21 @@ The test stack is a reusable, deterministic containerized environment that repre
 
 1. Confirm the service graph inventory and shared dependency contracts.
 2. Check repository-local guidance (`AGENTS.md`, `SPEC.md`, `ADR.md`), then identify required harness variables.
-3. Ensure test orchestration can consume:
-   - a generated namespace ID,
+3. Require the owning Codex session ID in `CODEX_THREAD_ID`. One session owns one active stack namespace.
+4. Ensure test orchestration can consume:
+   - the Codex session ID as its namespace ID,
    - generated stack metadata,
    - service image tags,
    - readiness checks and test selectors.
 
 ## Stack configuration
 
-1. Define a stable namespace:
-   - `STACK_ID` (required for stack identity).
-   - Fall back to a stable runtime identifier only if explicitly allowed.
-   - Fail fast if no namespace source is available.
+1. Define the session-bound namespace:
+   - `CODEX_THREAD_ID` is required and identifies the owning Codex session.
+   - `STACK_ID` is required and must equal `CODEX_THREAD_ID` exactly.
+   - Do not use a fallback namespace, generated runtime identifier, or shared default.
+   - Fail fast before any build or container starts when either value is missing or they differ.
+   - A session may recreate its namespace after teardown for a retry. It must not start a second stack or run two stacks concurrently.
 2. Load shared stack defaults in one stack config source (for example, `.testing/.env`-style file).
 3. Set testing mode explicitly:
    - enable ephemeral account APIs for e2e bootstrap (`TESTING_EPHEMERAL_API_ENABLED=true`);
@@ -41,13 +44,14 @@ The test stack is a reusable, deterministic containerized environment that repre
 
 ## Start flow
 
-1. Resolve stack-specific values and expose them via a generated stack metadata file for dependent scripts.
+1. Resolve session-scoped stack values and expose them via a session-scoped generated metadata file for dependent scripts.
 2. Start all shared infra and application services from a compose-like manifest in a single namespace.
 3. Block until explicit readiness checks pass for:
    - core infrastructure services (data stores, cache/broker),
    - all services required by the current test target.
 4. Validate that discovery endpoints resolve by internal service DNS/hostnames used by all services.
 5. Refresh dependency images from registry for non-local services by default.
+6. Keep runner outputs, logs, disks, networks, and container resources scoped to `CODEX_THREAD_ID`. Do not use a workspace-wide lock for build or E2E. Serialize only a final mutation that shares an external authority.
 
 ## Image policy
 
@@ -70,12 +74,13 @@ The test stack is a reusable, deterministic containerized environment that repre
    - start → run → teardown.
 2. Optional warm-stack path:
    - keep stack alive only for explicit debug sessions;
-   - record the namespace and teardown manually with matching identifiers.
+   - record the Codex session ID and teardown manually with the matching identifiers.
 3. On stop/shutdown, remove ephemeral storage and mounted test state to prevent cross-run contamination.
 
 ## Troubleshooting checkpoints
 
-- `STACK_ID` mismatch between test launcher and stack harness.
+- missing `CODEX_THREAD_ID`, or a `STACK_ID` that does not equal it.
+- shared runner output, disk, network, or container resource leaking across Codex sessions.
 - Secret mismatch between test bootstrap and API routes (`ephemeral` operations fail).
 - Missing readiness before test start.
 - Service route mismatch between internal discovery and external/base URLs.
