@@ -24,6 +24,8 @@ If two or more local plugin skills need non-trivial coordination, coordinate dep
 
 ## Implementation Workflow
 
+Keep implementation and test authorship separate. An agent that writes or edits production code for a behavior must not write or edit the automated tests that validate that behavior. Assign all test creation and test updates to a different subagent. The coordinating agent may integrate both changes, but must not act as both the implementer and test author.
+
 1. Read the plan, repo `AGENTS.md`, relevant `SPEC.md`, and relevant `ADR.md` when decisions constrain the work.
 2. Start by creating or reusing one tracker issue for this plan execution.
    - If this is a new plan execution, create one issue now, link to the plan, and describe the overall feature/fix at a high level.
@@ -38,14 +40,21 @@ If two or more local plugin skills need non-trivial coordination, coordinate dep
    - the files or modules it owns
    - not to revert edits made by others
    - to keep changes simple, concrete, and spec-aligned
+   - not to create or modify automated tests for the behavior it implements
    - to run the smallest relevant validation it can
    - to report changed paths and validation results
-7. Integrate worker results locally, resolve conflicts, and keep the plan checklist current.
-8. Prefer targeted validation during implementation:
+7. Assign automated test creation and updates for each implementation slice to a separate test-author subagent that did not implement that slice. Tell each test author:
+   - the plan's expected behavior, acceptance criteria, and relevant public contracts
+   - the test files or modules it owns
+   - not to modify production code
+   - to derive the test cases independently and report any behavior mismatch to the implementer
+   - to run the smallest relevant test command and report changed paths and results
+8. Integrate implementation and test-author results locally, resolve conflicts, and keep the plan checklist current.
+9. Prefer targeted validation during implementation:
    - targeted Go tests for touched packages
    - targeted Playwright tests for changed browser flows
    - focused type checks, linters, or route tests when they are the smallest useful signal
-9. Do not run `just build` or `just e2e` until the plan is fully implemented and targeted validation is passing or any failures are understood.
+10. Do not run `just build` or `just e2e` until the plan is fully implemented and targeted validation is passing or any failures are understood.
 
 ## Batch LAN Validation
 
