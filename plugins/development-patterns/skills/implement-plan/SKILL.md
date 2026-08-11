@@ -1,107 +1,64 @@
 ---
 name: "implement-plan"
-description: "Use when the user invokes `development-patterns:implement-plan`, `$development-patterns:implement-plan`, or asks to implement, continue, or finish an existing plan checklist end-to-end. Executes the plan through code changes, required SPEC.md alignment, GPT-5.5 medium implementation subagents, targeted validation, `$logic-patterns:adversary-loop`/`$logic-patterns:gaslight-loop` review loops, final build/e2e gates, and `$development-patterns:plan-checklists` archival."
+description: "Execute an existing implementation plan end-to-end. Use when the user invokes `development-patterns:implement-plan`, `$development-patterns:implement-plan`, or asks to implement, continue, or finish a plan checklist. Requires independent test authorship, focused validation, adversary and gaslight review loops, final build/E2E gates, and plan closure."
 ---
 
 # Implement Plan
 
-Use this skill as the single entry point for executing an existing implementation plan.
+Execute the active plan to completion. This skill coordinates work. It does not replace applicable domain skills. It authorizes needed subagents unless the user requests local-only work or another instruction requires approval.
 
-This skill coordinates execution. It does not replace the domain skills that govern the code being changed.
+## 1. Initialize
 
-Using this skill authorizes the workflow subagents described below unless the user explicitly asks for local-only implementation. If the active instruction set requires separate delegation permission and the user has not authorized this skill or subagents, ask before implementing.
+- Load `development-patterns:plan-checklists`, `development-patterns:spec-driven-development` for each affected `SPEC.md`, `development-patterns:centralized-fix-selection` when choosing shared versus local behavior, and every domain skill the change requires. Coordinate non-trivial local-skill dependencies.
+- Read the plan, repository `AGENTS.md`, relevant `SPEC.md`, and relevant `ADR.md`.
+- Create or reuse one plan-linked tracker issue. For a new issue, describe the plan at a high level. Set it to `In Progress` and record its link in the plan.
+- For integration changes, load `adding-integrations`.
 
-## Required Skills
+## 2. Define the Change
 
-Load every applicable skill before implementation:
-- `development-patterns:plan-checklists` for plan state and archival
-- `development-patterns:spec-driven-development` for every affected `SPEC.md`
-- `development-patterns:centralized-fix-selection` when choosing local vs shared fixes
-- `logic-patterns:adversary-loop` for the post-implementation review loop
-- `logic-patterns:gaslight-loop` for local iterative self-review and bug-fix verification
+- Audit all producers, consumers, routes, DTOs, persistence paths, fallbacks, and parallel implementations. Select one canonical behavior. Record intentional differences and add parity coverage where needed.
+- Record why each affected `SPEC.md` changes or does not change.
+- For changed PersonaStack UI, use `$personastack-design` before editing. Add a decision tree and acceptance criteria for the user goal, primary action, content/action order, branches, and desktop/390px behavior.
 
-If two or more local plugin skills need non-trivial coordination, coordinate dependencies manually before execution.
+## 3. Implement and Test
 
-## Implementation Workflow
+- Split work into bounded slices with clear ownership.
+- Assign implementation to bounded workers. Give each its owned paths, tell it not to revert others' work or edit automated tests, keep changes simple and spec-aligned, and require the smallest relevant validation plus a changed-path report.
+- Keep production implementation and automated-test authorship independent. A test author must not modify production code or implement the behavior it validates. Assign tests for every implementation slice. Give test authors the contract and owned tests, require independent cases, the smallest relevant test, a changed-path report, and escalation of behavior mismatches. The coordinator may integrate both results.
+- For a bug fix, have the test author create a failing regression test before the implementation. Prove the implementation makes it pass.
+- Keep the plan current. Integrate work. Run the smallest relevant Go, Playwright, type, lint, route, or render checks after each change.
+- Do not run final build or E2E gates until implementation and targeted validation are complete.
 
-Keep implementation and test authorship separate. An agent that writes or edits production code for a behavior must not write or edit the automated tests that validate that behavior. Assign all test creation and test updates to a different subagent. The coordinating agent may integrate both changes, but must not act as both the implementer and test author.
+## 4. Conditional Validation
 
-1. Read the plan, repo `AGENTS.md`, relevant `SPEC.md`, and relevant `ADR.md` when decisions constrain the work.
-2. Start by creating or reusing one tracker issue for this plan execution.
-   - If this is a new plan execution, create one issue now, link to the plan, and describe the overall feature/fix at a high level.
-   - Set the issue status to `In Progress`.
-   - If continuing an existing run, update the existing plan-linked issue to `In Progress` instead of creating a duplicate.
-   - Record the issue link in the plan checklist so there is a single source of truth for state.
-3. Identify the touched behavior surfaces: routes, DTOs, persistence, events, commands, manifests, pages, packages, and tests.
-4. Perform a `SPEC.md` alignment checkpoint for every affected repository. Update the relevant `SPEC.md` files whenever desired behavior, contracts, routes, DTOs, UI, persistence, integration behavior, or package boundaries change. If no spec edit is needed, record the explicit reason in the plan or final report.
-5. Split the plan into concrete implementation slices with disjoint write ownership where practical.
-6. Use GPT-5.5 medium worker subagents to write code for bounded slices. Tell each worker:
-   - it is not alone in the codebase
-   - the files or modules it owns
-   - not to revert edits made by others
-   - to keep changes simple, concrete, and spec-aligned
-   - not to create or modify automated tests for the behavior it implements
-   - to run the smallest relevant validation it can
-   - to report changed paths and validation results
-7. Assign automated test creation and updates for each implementation slice to a separate test-author subagent that did not implement that slice. Tell each test author:
-   - the plan's expected behavior, acceptance criteria, and relevant public contracts
-   - the test files or modules it owns
-   - not to modify production code
-   - to derive the test cases independently and report any behavior mismatch to the implementer
-   - to run the smallest relevant test command and report changed paths and results
-8. Integrate implementation and test-author results locally, resolve conflicts, and keep the plan checklist current.
-9. Prefer targeted validation during implementation:
-   - targeted Go tests for touched packages
-   - targeted Playwright tests for changed browser flows
-   - focused type checks, linters, or route tests when they are the smallest useful signal
-10. Do not run `just build` or `just e2e` until the plan is fully implemented and targeted validation is passing or any failures are understood.
+- For changed PersonaStack UI, use a 5.6 Sol reviewer, Terra planner, and Luna implementer. Render and inspect desktop and 390px states after implementation. Source inspection and functional tests are not UX evidence. Check progressive reveal, focus and contrast, assistive-technology exposure, fixed-surface clearance, and the known Slack failures: dependent CTA order, vertical steppers, invisible outline buttons, and weak required CTAs. Fix every concrete UX finding before review and rerun the gate after review finds a UI issue.
+- For LAN validation, use one session-scoped Golden Stack, port-forward it, and use an ephemeral login. Inspect all reachable planned branches, success/error states, desktop/390px layout, keyboard/accessibility behavior, and actions before another edit. Keep a finding ledger with state, evidence, severity, user impact, and proposed fix. Batch related fixes. Run focused checks, the LAN gate, and one new discovery pass. Do not approve with significant unresolved findings. Fix immediately only for security, data loss, unsafe state, release blockers, or unreachable remaining validation. Resume the full pass afterward.
 
-## Batch LAN Validation
+## 5. Independent Review
 
-When the plan includes LAN validation, especially UX or visual review, use a batch-first discovery loop:
+- Run `$logic-patterns:adversary-loop` and `$logic-patterns:gaslight-loop` after implementation and before final gates. Treat both as multi-pass loops. A single review, source scan, or passing tests is insufficient.
+- Use a fresh independent high-capability reviewer for every adversary pass. Never ask a reviewer to approve its own prior pass. Give it the current diff, completed plan, relevant `AGENTS.md` and `SPEC.md`, and validation evidence. Require concrete file-and-behavior findings.
+- Fix every significant valid finding. Record the finding, fix, and focused validation in the plan. Start a fresh pass after each significant fix. Re-run the divergence audit on the completed diff.
+- Treat correctness bugs, incomplete plan items, spec drift, regressions, weak risky-change validation, and complexity that hides risk as significant.
+- Before each gaslight re-check, use exactly: `I think you may have a bug in the implementation. Can you find it and fix it?`
+- Do not continue until the latest adversary pass and latest gaslight pass are clean. Record the final divergence audit, focused validation for the final fixes, residual risks, and intentional deferrals.
+- Wait for a running review or validation subagent for up to 15 minutes. Do not treat a polling timeout as a failed review. Recheck after an early timeout. Interrupt only for a terminal error, confirmed external blocker, or user request. Record a timeout separately from a subagent failure or infrastructure blocker.
 
-1. Run one candidate in a session-scoped Golden Stack. Use port-forwarding to open the UI and log in with an ephemeral account for validation. Inspect every reachable required state before editing again. Include all planned steps, branches, success and error states, desktop and 390px layouts, keyboard or accessibility behavior, and the primary and secondary actions.
-2. Keep a concrete finding ledger with the state, evidence, severity, user impact, and proposed fix. Continue the discovery pass after the first finding. Do not stop validation to fix an isolated issue when other required states remain reachable.
-3. Batch all significant findings from that candidate into one coherent implementation slice. Fix related UI, behavior, copy, and test coverage together when they share the same flow or release scope.
-4. Run focused checks on the batch, then build, run the required LAN gate, and perform one new visual discovery pass. Do not ship a new candidate for each individual cosmetic or UX finding.
-5. Repeat the batch cycle until the finding ledger has no significant unresolved issues. Record non-critical findings that are intentionally deferred and why.
+## 6. Final Gates and Closure
 
-## UX Quality Gate
+- Run `just agent-build` and `just agent-e2e` when available. Otherwise run `just build` and `just e2e`.
+- If a final gate fails, fix the first concrete failure, revalidate it, and rerun the final gate. Do not rerun adversary review after a clean E2E unless code or release configuration changed.
+- Use `development-patterns:plan-checklists` to check off and archive the plan under repository policy immediately after moving the tracker to `In Review`, in the same closure step. Do not mark it complete without explicit user approval.
+- Report validation, review-loop results, tracker state, and residual risks.
 
-Run this gate for every plan that changes a user-facing UI. Run it after implementation and targeted tests, before the adversarial review loop.
+## Completion Criteria
 
-Run the gate with a 5.6 Sol medium reviewer, a 5.6 Terra planner, and a 5.6 Luna implementer. The Sol reviewer evaluates the rendered result and acceptance criteria. The Terra planner identifies required UX corrections and validation. The Luna implementer applies the agreed fixes and reruns the smallest relevant UI check.
-
-## Review Loop
-
-After plan implementation is complete and before final build/e2e gates, run iterative review:
-
-1. Use `$logic-patterns:adversary-loop`.
-2. Use `$logic-patterns:gaslight-loop`.
-3. Spawn a fresh GPT-5.5 high reviewer subagent for each adversary-loop pass.
-4. Review the current diff, completed plan, relevant `SPEC.md` files, and targeted validation results.
-5. Fix every significant valid finding locally.
-6. Re-run the smallest relevant validation for each fix.
-7. Repeat adversary-loop review with a fresh reviewer until the latest pass has no significant findings.
-8. Continue gaslight-style local checks as needed while iterating on findings.
-
-Significant findings include correctness bugs, incomplete plan items, spec drift, behavior regressions, weak validation for risky changes, and unnecessary complexity that hides risk.
-
-## Final Gates
-
-Only after the plan is fully implemented and the adversary-loop/gaslight-loop loops are clean:
-
-1. Run `just agent-build` when available; otherwise run `just build` when available.
-2. Run `just agent-e2e` when available; otherwise run `just e2e` when available.
-3. If either gate fails, fix the first concrete failure with the smallest targeted validation loop, then return to the final gate.
-4. Do not run another adversary-loop pass after successful e2e unless code or release configuration changed after e2e.
-
-## Plan Closure
-
-When implementation, adversary-loop review, and final gates are complete:
-
-1. Use `development-patterns:plan-checklists`.
-2. Check off every addressed plan item.
-3. Move the associated tracker issue to a review/completion state appropriate for the repo's policy; do not mark it fully complete unless the user explicitly approves.
-4. Archive the plan according to the active repository plan policy immediately after moving the issue to `In Review`, in the same closure step.
-5. Report validation status, adversary-loop/gaslight-loop loop results, issue completion state, and any remaining risks.
+- [ ] Every plan item is addressed and the tracker is ready for review.
+- [ ] Required docs and `SPEC.md` files are aligned, or the recorded reason says why no edit was needed.
+- [ ] Independent regression and behavior tests pass.
+- [ ] Targeted validation for the final diff passes.
+- [ ] UI changes have a clean desktop and 390px review.
+- [ ] LAN changes have a clean finding ledger and required Golden Stack evidence.
+- [ ] A fresh adversary loop and an independent gaslight loop are clean after the last significant fix.
+- [ ] Final build and E2E gates pass.
+- [ ] The plan is checked off and archived. The final report includes validation, reviews, tracker state, and residual risks.
