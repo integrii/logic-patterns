@@ -24,6 +24,7 @@ Add this ledger to the active plan. It is the single ready-for-review authority.
 - [ ] Required contract and regression coverage is complete: <evidence or rationale>
 - [ ] Local review is clean: <scope, evidence>
 - [ ] Independent review is clean or not required: <scope, evidence or rationale>
+- [ ] `$logic-patterns:adversary-loop` is clean after completed code and focused tests: <scope, evidence>
 - [ ] Final build and applicable acceptance gates are green: <commands or rationale>
 - [ ] Tracker is in the required review state, if used: <link or rationale>
 ```
@@ -51,10 +52,12 @@ Use an independent test author or subagent only when it materially improves conf
 
 ## 3. Stabilize the final diff
 
+After code implementation and focused tests are complete:
+
 1. Load and run `$logic-patterns:gaslight-loop` locally against the completed diff.
-2. For material code, contract, configuration, persistence, security, or cross-service changes, load `$logic-patterns:adversary-loop` and obtain a fresh independent review of that diff. Require concrete findings and review the design for unnecessary paths, state, configuration, and abstractions.
-3. Record each review receipt with its scope, result, findings, fixes, and focused validation. For a non-material change, record why independent review is not required.
-4. If a review finds a significant issue, fix it, rerun focused validation, repeat local review for the fix, then obtain a fresh independent review when one is required.
+2. Load and run `$logic-patterns:adversary-loop` against the complete diff. Do not close the phase or plan until the loop has a fresh clean pass.
+3. Record each review receipt with its scope, result, findings, fixes, and focused validation.
+4. If a review finds a significant issue, fix the full ledger, rerun focused validation, then repeat local review and the adversary loop until clean.
 
 ## 4. Close
 
