@@ -52,6 +52,8 @@ Use an independent test author or subagent only when it materially improves conf
 
 ## 3. Stabilize the final diff
 
+Use GPT-6 Sol with high reasoning (`gpt-6-sol`, `high`) for independent reviewers, follow-up repair reviews, and adversary-loop reviewers invoked by this skill. An explicit user request for another reviewer model or reasoning level overrides this default. Preserve applicable approval requirements.
+
 After code implementation and focused tests are complete:
 
 1. Load and run `$logic-patterns:gaslight-loop` locally against the completed diff.
