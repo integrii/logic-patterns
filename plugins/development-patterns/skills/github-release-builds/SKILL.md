@@ -258,6 +258,10 @@ Never use `git add '*.yaml' '*.yml'`; it fails when one glob has no matches.
 
 Do not put Markdown backticks in an unquoted shell heredoc for release notes. Shell command substitution will execute text inside backticks and can paste `docker pull` logs into the release body. Prefer the `echo` block above.
 
+## PersonaStack release boundary
+
+`personastack-background` is a PersonaStack service whose normal `main` pushes publish source only. Its LAN image is built from a source revision and delivered by PersonaStack Ship through the Kubernetes catalog, Kargo, and Argo CD. Its private GHCR image is built only from an explicitly authorized semver tag. Do not add a main-branch image publisher for this repository. The background repo pins `personastack-api/pkg/client` in `go.mod` and commits the generated vendor tree so builds do not need cross-repository credentials.
+
 ## RELEASE.md Template
 
 Create or update `RELEASE.md`:
