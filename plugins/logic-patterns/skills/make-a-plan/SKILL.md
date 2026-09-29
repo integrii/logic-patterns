@@ -1,60 +1,88 @@
 ---
 name: "make-a-plan"
-description: "Use when a task requires an implementation plan: repeatedly add major missing details, then simplify while preserving required outcomes and critical fixes."
+description: "Create a small, outcome-first implementation plan that expands for real gaps, then contracts to the simplest direct path. Use for implementation planning, not audits or exhaustive inventories unless requested."
 ---
 
-# Planning
+# Make A Plan
 
-Use this skill when producing an implementation plan for a task.
+Create an active `development-patterns:plan-checklists` plan that gives an implementer the shortest safe path to the requested outcome.
 
-Persist the final plan as an active `development-patterns:plan-checklists` checklist. Include ordered unchecked implementation slices and their validation and acceptance criteria.
+Load applicable project guidance and only the authority needed for the change. Use `logic-patterns:1-3-1` and `development-patterns:centralized-fix-selection` only when a real design choice exists. Do not manufacture alternatives for a straightforward extension of an existing path.
 
-Required skills:
-- `development-patterns:plan-checklists` for plan file location, checklist structure, and closure/move rules.
-- `logic-patterns:1-3-1` for three independent candidate approaches, tradeoff comparison, and selection of one implementation path.
-- `development-patterns:centralized-fix-selection` for choosing the narrowest safe centralized policy, shared abstraction, or local call site.
+## Frame the outcome
 
-Before planning, read applicable `AGENTS.md`, `SPEC.md`, `ADR.md`, and authoritative project documentation. If a material unknown could change the plan's outcome, ask for clarification. Otherwise state the assumption.
+Before drafting, state:
 
-Apply a simplicity and convergence filter throughout planning:
-- Define the smallest observable outcome the user, specification, and compatibility constraints require. Do not treat an existing path, process, feature, or abstraction as a requirement without evidence.
-- Leave the system simpler than you found it. Remove unnecessary process, functionality, state, configuration, and compatibility machinery.
-- Prefer one canonical codepath and procedure. Use a logic gate for a minor difference when the contract, authority, ownership, and lifecycle are the same.
-- Keep a separate path only when those differences are material and cannot be represented safely in the canonical path.
-- Centralization does not require a new shared abstraction. Add an abstraction only when it demonstrably removes more concepts than it adds for current consumers. Otherwise favor direct, simple, idiomatic code.
+- The named user, administrator, or service journey that must work.
+- The observable success condition and the smallest test evidence that proves it.
+- The existing canonical codepath to extend.
+- Explicit constraints and non-goals.
 
-Create the plan with one of these models: 5.6 Terra medium, 5.6 Terra high, 5.6 Sol medium, or 5.6 Sol high. Choose the model according to the plan's sensitivity and complexity. Use a medium model for routine, bounded work. Use a high model for sensitive, ambiguous, cross-service, security-critical, migration, or otherwise high-complexity work. Select Terra or Sol according to the applicable planning and review policy.
+Ask only about an unknown that materially changes the outcome. Otherwise record a reasonable assumption.
 
-Workflow:
-1. Frame the problem before drafting: state the goal, knowns, unknowns, assumptions, constraints, risks, success criteria, and non-goals.
-2. Draft an initial plan.
-3. Use `logic-patterns:1-3-1` on the problem and initial plan:
-   - generate three independent, concrete, low-complexity implementation approaches
-   - compare them for correctness, simplicity, integration quality, failure risk, rollback ease, execution speed, and complexity removed or added
-4. Apply `development-patterns:centralized-fix-selection` to the candidates before finalizing the `1-3-1` choice. Prefer the narrowest safe canonical policy or shared implementation. Do not introduce a shared abstraction merely to centralize behavior. Re-rank or replace the selected candidate when it safely converges paths or removes process, state, configuration, or functionality. Choose a local call site only when centralization is unsafe, conflicts with the spec, or the behavior is intentionally local.
-5. Record the selected decision and short rationale, including the canonical path, complexity removed, and any justified remaining differences. Trace only affected surfaces at a depth proportional to the changed behavior. Add integration proof, failure paths, rollback, observability, ownership, and authoritative readback only when relevant.
-6. Add any relevant missing detail and repeat until none remains.
-7. Simplify and repeat until no significant simplification remains. Remove unnecessary steps, branches, abstractions, state, configuration, compatibility machinery, and functionality. Converge equivalent codepaths and procedures. Keep a separate path only when a logic gate cannot preserve correctness, safety, ownership, or the required contract.
-8. Finalize the plan only when both loops have reached no further changes.
+Do not make an existing route, store, process, compatibility mode, audit, migration inventory, cross-service consumer, or abstraction a requirement without evidence that the journey needs it.
 
-Keep both loops internal. Do not put intermediate versions, loop questions, discarded alternatives, or pass-by-pass reports in the plan. Persist and present only the converged plan a follow-on implementer needs. Mention an iteration only when it changes a final requirement, and record the requirement rather than the history. Provide the audit trail separately only when explicitly requested.
+## Expand once, then classify
 
-Loop rules:
-- “Major detail” means a relevant missing dependency, validation/test point, failure path, rollback, observability, ownership, or contract/spec alignment issue.
-- “Significant simplification” means reducing complexity while preserving:
-  - intended outcomes
-  - critical fixes
-  - correctness and safety
-- It includes deleting redundant paths, process, state, configuration, or abstractions, and representing a minor variant with a logic gate in the canonical path.
+Make one bounded expansion pass for missing dependencies that can block the named journey. Classify each item as one of:
 
-Resulting plan format:
-- objective and required outcomes
-- selected decision and rationale
-- explicit non-goals
-- scope, affected entrypoints, dependencies, ownership, and contracts
-- concrete implementation slices and sequencing
-- applicable failure paths, rollback, observability, and security constraints
-- targeted validation and acceptance criteria
-- remaining risks or blockers only when they affect implementation or validation
+- `now`: necessary for this journey.
+- `later phase`: required outcome work owned by a later named journey.
+- `defer`: useful but not required now. Record it as a concise defer item or tracker issue.
+- `block`: needs a user decision or an external change.
 
-Plan success criteria cover implementation and testing. Do not include deployment, release promotion, or production rollout unless the current user request explicitly asks to ship. Include every applicable automated test suite. Add integration or deployed-environment validation only when the change or an applicable authority requires it. For service-to-service changes, include relevant producer, consumer, and authoritative readback checks.
+Do not repeat expansion until no imaginable detail remains. Do not create exhaustive route, schema, keyspace, documentation, or test inventories unless the user explicitly requested an audit or those artifacts are necessary to enforce a stated safety boundary.
+
+## Contract to the direct design
+
+Run one contraction pass before finalizing the plan.
+
+- Prefer the existing path plus a small logic gate over a new codepath.
+- Use one authority, one mutation path, and one source of truth when the variants share ownership and lifecycle.
+- Add a package, table, protocol, durable state machine, compatibility layer, or cross-service contract only when the named journey cannot work without it. State why the existing path cannot represent it.
+- Remove a proposed abstraction when it adds more concepts than it removes for the current consumers.
+- Keep personal, organization, and other minor variants in the same path when their difference is a fact, not a different lifecycle.
+- Record a small complexity budget: changed owners, new persistent state, new packages, and old paths deleted. Reconsider the design when the implementation needs substantially more than this budget.
+
+For a material architecture choice, compare the few realistic options for correctness, simplicity, integration, failure risk, rollback, and code removed or added. Select one canonical path and record the rejected complexity, not a long decision history.
+
+## Plan the work
+
+Use phases only to deliver complete, named journeys or coherent resource families. A phase does not need to be independently shippable while outward dependencies are being built. It must not leave a temporary compatibility wrapper as its durable outcome.
+
+When a feature changes a shared contract, change that core contract first.
+Use the strongest mechanical check available to find every dependent caller.
+Repair those callers before building outward. Do not keep an optional old path
+solely to let incomplete callers continue working.
+
+Make each phase one implementation and review unit. It delivers one customer or
+administrator feature, or one coherent resource family. Do not combine several
+unrelated features merely because they share a schema or authorization layer.
+When a plan requests independent review, define phases so the reviewer can
+judge that complete feature without being asked to critique unfinished later
+work.
+
+For each phase, specify:
+
+- Journey and acceptance condition.
+- Existing entrypoints and ownership to change.
+- The canonical implementation path and any justified logic gate.
+- Any shared-contract closure order and mechanical check.
+- Explicit non-goals and later-phase dependencies.
+- Focused validation: the lowest-cost unit, store/command, registered-handler, client, or UI test that proves the behavior. Add stateful in-process workflows when behavior spans requests or mutations.
+- Only applicable failure, authorization, migration, rollback, observability, and documentation work.
+
+Keep API, browser, and service consumers in the same phase only when the journey needs all of them. Do not turn every future resource migration into a prerequisite for the first vertical slice.
+
+## Final plan format
+
+Persist only the converged plan:
+
+- Objective and required outcomes.
+- Selected direct design and rationale.
+- Non-goals and defer list.
+- Ordered journey/resource-family phases.
+- Focused validation and acceptance evidence.
+- Material blockers or risks.
+
+Include deployment, release, or production migration only when the user asked for it or an applicable authority requires it.
