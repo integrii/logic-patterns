@@ -7,6 +7,8 @@ description: "Create a small, outcome-first implementation plan that expands for
 
 Create an active `development-patterns:plan-checklists` plan that gives an implementer the shortest safe path to the requested outcome.
 
+For PersonaStack, create the active checklist in the workspace root at `plans/in-progress/<repo>/YYYY-MM-DD/<PLANNAME>.md`. Use the GitHub repository name, or `agent-root` for workspace-wide work. Follow `development-patterns:plan-checklists`, root `AGENTS.md`, and `plans/README.md` for lifecycle and archival. Completed plans belong at `plans/completed/<repo>/YYYY-MM-DD/<PLANNAME>.md`.
+
 Load applicable project guidance and only the authority needed for the change. Use `logic-patterns:1-3-1` and `development-patterns:centralized-fix-selection` only when a real design choice exists. Do not manufacture alternatives for a straightforward extension of an existing path.
 
 ## Frame the outcome

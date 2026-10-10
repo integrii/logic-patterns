@@ -1,31 +1,31 @@
 ---
 name: "plan-checklists"
-description: "Use when creating, maintaining, or closing markdown checklist plans for implementation work. Follow repo AGENTS storage policy: by default, place active plans under `.plans/$REPONAME/in-progress/$PLANNAME` and completed plans under `.plans/$REPONAME/completed/YYYY-MM-DD/$PLANNAME`."
+description: "Use when creating, maintaining, or closing markdown checklist plans for implementation work. Follow repo AGENTS storage policy. PersonaStack plans live in the workspace root `plans/{in-progress|completed}/$REPONAME/YYYY-MM-DD/$PLANNAME.md`."
 ---
 
 # Plan Checklists
 
 Use this skill when work should be tracked in markdown checklist plans.
 
-This skill reflects the common practice across the child service repositories:
+This skill follows repository-owned `AGENTS.md` policy, with these PersonaStack workspace rules:
 - track implementation work as markdown checklist plans in the location required by repo `AGENTS.md`
-- keep active plans in `.plans/$REPONAME/in-progress/$PLANNAME` by default
-- move completed, abandoned, or superseded plans to `.plans/$REPONAME/completed/YYYY-MM-DD/$PLANNAME`
+- keep active plans in the root workspace `plans/in-progress/$REPONAME/YYYY-MM-DD/$PLANNAME.md`
+- move completed, abandoned, or superseded plans to the root workspace `plans/completed/$REPONAME/YYYY-MM-DD/$PLANNAME.md`
 - read `ADR.md` and `SPEC.md` before planning architecture or object-model changes when the repo requires that
 
 ## Core Rules
 
-- Put active implementation plans in `.plans/$REPONAME/in-progress/$PLANNAME` unless repo policy explicitly requires a different local work queue.
-- `$REPONAME` is the GitHub-style `org/repo` string for the owning repository.
+- For PersonaStack, put active implementation plans in the workspace root `plans/in-progress/$REPONAME/YYYY-MM-DD/$PLANNAME.md`. Otherwise, follow the repository `AGENTS.md`.
+- `$REPONAME` is the GitHub repository name. Use `agent-root` for workspace-wide plans.
 - Use markdown checklists, not prose-only notes.
 - Keep plans concise and task-oriented.
 - One active file should represent one active stream of work.
 - Update the checklist as work progresses; do not leave it stale.
 - If a plan is executed through `$development-patterns:implement-plan`, track a single linked issue only in that workflow and do not create a second issue here.
 - When starting a plan through that workflow, reference the associated tracker issue in the plan file.
-- Move finished, abandoned, or superseded plans to `.plans/$REPONAME/completed/YYYY-MM-DD/$PLANNAME` promptly.
+- For PersonaStack, move finished, abandoned, or superseded plans to `plans/completed/$REPONAME/YYYY-MM-DD/$PLANNAME.md` in the workspace root promptly. Otherwise, follow the repository `AGENTS.md`.
 - Do not leave inactive plans sitting in the active `in-progress` queue.
-- Do create repo-local `.plans/` as the default plan location unless repo policy explicitly requires a different location.
+- For PersonaStack work, do not create repository-local `.plans/` directories or external `~/.ai/plans` files. This applies to child-repository and nested-repository tasks.
 - Do not include deployment or shipping procedures in plans (for example, full build steps, container image publishing, Kargo/Argo workflow, cluster rollout, or live deploy actions).
 - Include testing tasks only as targeted verification activities.
 
@@ -62,7 +62,7 @@ Avoid:
 
 ## Lifecycle
 
-- create the plan in the path mandated by repo policy when work starts (normally `.plans/$REPONAME/in-progress/...`)
+- create the plan in the path mandated by repo policy when work starts (for PersonaStack, `plans/in-progress/$REPONAME/YYYY-MM-DD/...` in the workspace root)
 - revise the checklist as scope changes
 - mark items complete as the work lands
 - move the file to the matching completed bucket when the plan is done, abandoned, or replaced
