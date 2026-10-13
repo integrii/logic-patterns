@@ -10,6 +10,7 @@
         "adversary-loop",
         "bifurcate",
         "first-principles-rebuild",
+        "five-whys",
         "gaslight-loop",
         "greyhat",
         "make-a-plan",
@@ -25,6 +26,7 @@
         "architecture-spec",
         "centralized-fix-selection",
         "ephemeral-testing",
+        "github-release-builds",
         "implement-plan",
         "plan-checklists",
         "spec-driven-development"

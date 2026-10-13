@@ -9,25 +9,33 @@ Engineering-oriented workflows for implementation, architecture, testing, and ex
 ## Skills in this plugin
 
 ### architecture-decision-records
-Use when teams are making durable design choices that affect long-term behavior. It keeps decisions explicit, scoped, and discoverable via local `ADR.md` so assumptions are not lost between tasks. This is useful for reducing repeated relitigation and for preserving non-obvious rationale that affects future execution.
+
+Keep user-decided architecture choices in repository-local `ADR.md`. Load those decisions before design work and keep incidental implementation notes elsewhere.
 
 ### architecture-spec
-Use when cross-repo boundaries or shared contracts are being shaped. It constrains decisions to workspace-level ownership and compatibility rules instead of per-service ad-hoc edits. This is useful for preventing architecture drift and duplicate or conflicting definitions of shared domains.
+
+Define cross-service ownership, authority, boundaries, and compatibility in the workspace architecture document. Keep concrete service behavior in each owning repository's `SPEC.md`.
 
 ### centralized-fix-selection
-Use when deciding whether a behavior change belongs in shared policy, abstractions, or a local call site. It systematically evaluates control-point leverage and blast radius before changing code. This is useful for reducing duplicated behavior and improving consistency in cross-cutting fixes.
+
+Find the narrowest shared control point for behavior that spans multiple callers. Prefer a centralized policy or shared fix when safe and preserve external behavior unless the requested outcome requires a change.
 
 ### ephemeral-testing
-Use when implementation depends on a full local service graph with realistic integration behavior. It sets norms around namespacing, shared dependencies, readiness, and teardown so test environments stay reproducible. This is useful for reducing flaky local validation and making e2e debugging more deterministic.
+
+Run a reproducible multi-service test stack in one session-owned namespace. Require `STACK_ID` to equal `CODEX_THREAD_ID`, isolate outputs and resources, check readiness, and clean up between runs.
 
 ### github-release-builds
-Use when adding release automation that builds multi-arch container images from semver tags in GitHub Actions. It defines the GHCR image pattern, tag-triggered release workflow, manifest update step, release asset, validation checks, and `RELEASE.md` documentation.
+
+Build multi-architecture container images in GitHub Actions on semver tags and publish them to GHCR. Update example manifests, attach image release evidence, and document the tag-only release process in `RELEASE.md`.
 
 ### implement-plan
-Use when a concrete implementation plan already exists and must be executed to completion. It enforces plan checkpoints, spec alignment, staged review, targeted validation, and closure. This is useful for turning intentions into a disciplined execution flow with explicit quality gates.
+
+Execute an active plan through focused tests, a completion ledger, local review, and a clean adversary loop. Use GPT-6 Astra with medium reasoning for independent reviewers unless the user chooses otherwise. Close only after the final diff and required acceptance gates are verified.
 
 ### plan-checklists
-Use when you need explicit plan lifecycle governance instead of ad-hoc notes. It defines where plans are stored, how completion is tracked, and how closure is handled. This is useful for preventing lost context and for making implementation work auditable across sessions.
+
+Track implementation work with concise Markdown checklists and the repository's storage policy. Keep PersonaStack plans in the workspace root `.plans/` tree and archive inactive plans promptly. Keep shipping procedures outside implementation plans.
 
 ### spec-driven-development
-Use when repository behavior is ambiguous and desired state should lead implementation. It anchors work to a local `SPEC.md` that captures contracts, ownership, and implementation boundaries. This is useful for improving consistency, reducing accidental rework, and preventing drift between code and intended behavior.
+
+Define desired behavior, contracts, and implementation constraints in repository-local `SPEC.md`. Keep service specs aligned with accepted architecture and use them to guide implementation and validation.
