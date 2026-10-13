@@ -1,11 +1,13 @@
 ---
 name: "make-a-plan"
-description: "Create a small, outcome-first implementation plan that expands for real gaps, then contracts to the simplest direct path. Use for implementation planning, not audits or exhaustive inventories unless requested."
+description: "Create a small, outcome-first plan for code, tests, and implementation verification. Expand for real gaps, then contract to the simplest direct path. Exclude shipping procedures. Use for implementation planning, not audits or exhaustive inventories unless requested."
 ---
 
 # Make A Plan
 
 Create an active `development-patterns:plan-checklists` plan that gives an implementer the shortest safe path to the requested outcome.
+
+The plan ends with the code written, focused tests passing, and the implementation reviewed against its acceptance conditions. Rollout, shipping, release, deployment, publishing, and distribution belong to the later software pipeline. Do not include their procedures, checklist items, or gates in the implementation plan, including when project guidance describes them.
 
 For PersonaStack, create the active checklist in the workspace root at `.plans/in-progress/<repo>/YYYY-MM-DD/<PLANNAME>.md`. Use the GitHub repository name, or `agent-root` for workspace-wide work. Follow `development-patterns:plan-checklists`, root `AGENTS.md`, and `.plans/README.md` for lifecycle and archival. Completed plans belong at `.plans/completed/<repo>/YYYY-MM-DD/<PLANNAME>.md`.
 
@@ -46,11 +48,11 @@ Run one contraction pass before finalizing the plan.
 - Keep personal, organization, and other minor variants in the same path when their difference is a fact, not a different lifecycle.
 - Record a small complexity budget: changed owners, new persistent state, new packages, and old paths deleted. Reconsider the design when the implementation needs substantially more than this budget.
 
-For a material architecture choice, compare the few realistic options for correctness, simplicity, integration, failure risk, rollback, and code removed or added. Select one canonical path and record the rejected complexity, not a long decision history.
+For a material architecture choice, compare the few realistic options for correctness, simplicity, integration, failure risk, and code removed or added. Select one canonical path and record the rejected complexity, not a long decision history.
 
 ## Plan the work
 
-Use phases only to deliver complete, named journeys or coherent resource families. A phase does not need to be independently shippable while outward dependencies are being built. It must not leave a temporary compatibility wrapper as its durable outcome.
+Use phases only to implement complete, named journeys or coherent resource families. A phase must have focused implementation evidence. It must not leave a temporary compatibility wrapper as its durable outcome.
 
 When a feature changes a shared contract, change that core contract first.
 Use the strongest mechanical check available to find every dependent caller.
@@ -72,7 +74,7 @@ For each phase, specify:
 - Any shared-contract closure order and mechanical check.
 - Explicit non-goals and later-phase dependencies.
 - Focused validation: the lowest-cost unit, store/command, registered-handler, client, or UI test that proves the behavior. Add stateful in-process workflows when behavior spans requests or mutations.
-- Only applicable failure, authorization, migration, rollback, observability, and documentation work.
+- Only applicable failure handling, authorization, migration code and tests, observability code, and documentation changes. Exclude operational migration, rollback, and rollout procedures.
 
 Keep API, browser, and service consumers in the same phase only when the journey needs all of them. Do not turn every future resource migration into a prerequisite for the first vertical slice.
 
@@ -85,6 +87,7 @@ Persist only the converged plan:
 - Non-goals and defer list.
 - Ordered journey/resource-family phases.
 - Focused validation and acceptance evidence.
+- Completion criteria: required code and tests are written, focused checks pass, and implementation review findings are resolved.
 - Material blockers or risks.
 
-Include deployment, release, or production migration only when the user asked for it or an applicable authority requires it.
+Keep later pipeline work outside the plan. Do not turn deployment or distribution into implementation acceptance criteria, or add shipping commands as validation steps.
