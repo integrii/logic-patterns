@@ -260,7 +260,13 @@ Do not put Markdown backticks in an unquoted shell heredoc for release notes. Sh
 
 ## PersonaStack release boundary
 
-`personastack-background` is a PersonaStack service whose normal `main` pushes publish source only. Its LAN image is built from a source revision and delivered by PersonaStack Ship through the Kubernetes catalog, Kargo, and Argo CD. Its private GHCR image is built only from an explicitly authorized semver tag. Do not add a main-branch image publisher for this repository. The background repo pins `personastack-api/pkg/client` in `go.mod` and commits the generated vendor tree so builds do not need cross-repository credentials.
+PersonaStack overrides the generic build-on-tag templates above and below. Normal `main` pushes publish source only. LAN and production containers use `linux/amd64` only. Do not build ARM images or require hybrid manifests.
+
+Ship builds and tests the immutable source-SHA image through its owning multi-stage Containerfile. Ship publishes that image to the LAN registry and selects it through Argo CD or the API runtime owner. A separately authorized production preparation copies the tested LAN digest to GHCR without rebuilding or changing its manifest, configuration or layers. It creates the source repository's semver tag and GitHub Release with the promotion receipt. Tags do not trigger container builds. Retire tag-triggered and release-triggered rebuild workflows before using this path. Disable historical workflow revisions and drain active runs before tagging an older source revision.
+
+Use the repository-owned `personastack-ship` and `personastack-release` skills for the concrete interfaces and authority. Keep service-owned Railway plan/apply jobs as the production configuration writers. Ship must not write Railway directly. Do not add procedural Python, a second publisher or a standalone image verifier to this path. Extend Ship's finite Go contracts and in-process tests when a missing behavior belongs to release coordination.
+
+The background repository pins `personastack-api/pkg/client` in `go.mod` and commits its generated vendor tree. Its builds do not need cross-repository credentials.
 
 ## RELEASE.md Template
 
