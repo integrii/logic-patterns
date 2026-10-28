@@ -26,7 +26,6 @@ Add this ledger to the active plan. It is the single ready-for-review authority.
 - [ ] Independent review is clean or not required: <scope, evidence or rationale>
 - [ ] `$logic-patterns:adversary-loop` is clean after completed code and focused tests: <scope, evidence>
 - [ ] Final build and applicable acceptance gates are green: <commands or rationale>
-- [ ] Tracker is in the required review state, if used: <link or rationale>
 ```
 
 After all preceding gates are green, archive the plan and complete the goal.
@@ -34,7 +33,7 @@ After all preceding gates are green, archive the plan and complete the goal.
 ## 1. Scope once
 
 - Load `development-patterns:plan-checklists`, every skill the affected surfaces require, and only the relevant project guidance, specifications, and design decisions.
-- Create or reuse the plan-linked tracker when the project uses one.
+- Track implementation in the Markdown plan. External issue tracking is not required and must not block completion.
 - Use the plan's implementation points. Revise it only when repository evidence shows a smaller or safer design is needed. When a revision materially changes the selected design, scope, or acceptance criteria, update those plan sections and re-evaluate the decision before continuing.
 - Select the canonical path and the observable contract for each slice. Apply the repository's required regression matrix when relevant.
 - Choose final acceptance gates from the changed surface. UI, end-to-end, integration, and deployed-environment validation are required only when the plan or an applicable authority requires them.
@@ -66,5 +65,5 @@ After code implementation and focused tests are complete:
 - Confirm the ledger describes the exact final diff.
 - Run the final build and the acceptance gates selected during scoping. Record an unavailable required gate with its reason.
 - If a gate changes the diff, return to stabilization.
-- Update the tracker when the project uses one, then use `development-patterns:plan-checklists` to archive the completed plan and complete the goal.
-- Report the implementation points, validation, review receipts, tracker state when applicable, residual risks, and unavailable gates.
+- Use `development-patterns:plan-checklists` to archive the completed plan and complete the goal.
+- Report the implementation points, validation, review receipts, residual risks, and unavailable gates.
