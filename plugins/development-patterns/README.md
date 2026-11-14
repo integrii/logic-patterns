@@ -20,6 +20,10 @@ Define cross-service ownership, authority, boundaries, and compatibility in the 
 
 Find the narrowest shared control point for behavior that spans multiple callers. Prefer a centralized policy or shared fix when safe and preserve external behavior unless the requested outcome requires a change.
 
+### code-simplicity
+
+Keep code simple across languages with complexity limits, small consumer-focused interfaces, and focused module boundaries. Remove unnecessary abstractions and verify behavior with focused tests.
+
 ### ephemeral-testing
 
 Run a reproducible multi-service test stack in one session-owned namespace. Require `STACK_ID` to equal `CODEX_THREAD_ID`, isolate outputs and resources, check readiness, and clean up between runs.

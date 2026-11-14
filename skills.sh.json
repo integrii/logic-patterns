@@ -25,6 +25,7 @@
         "architecture-decision-records",
         "architecture-spec",
         "centralized-fix-selection",
+        "code-simplicity",
         "ephemeral-testing",
         "github-release-builds",
         "implement-plan",

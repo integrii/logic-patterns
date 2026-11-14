@@ -1,7 +1,7 @@
 <div align="center">
   <img src="plugins/logic-patterns/logo.png" alt="logic-patterns logo" width="420"/>
   <br/>
-  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-18%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
+  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-19%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
 </div>
 
 # logic-patterns
@@ -14,7 +14,7 @@ I think the future AI takes us to goes beyond coding and organizing our calendar
 
 ## Install plugin bundles
 
-Version [1.0.5](https://github.com/integrii/logic-patterns/releases/tag/v1.0.5) includes 18 skills in two Codex plugins:
+The source catalog includes 19 skills in two Codex plugins. Release [1.0.5](https://github.com/integrii/logic-patterns/releases/tag/v1.0.5) contains 18 skills.
 
 - `logic-patterns`: Generic problem-solving and reasoning workflows for technologists.
 - `development-patterns`: Effective engineering, execution, and implementation workflows.
@@ -86,6 +86,10 @@ Define cross-service ownership, authority, boundaries, and compatibility in the 
 #### centralized-fix-selection
 
 Find the narrowest shared control point for behavior that spans multiple callers. Prefer a centralized policy or shared fix when safe and preserve external behavior unless the requested outcome requires a change.
+
+#### code-simplicity
+
+Keep code simple across languages with complexity limits, small consumer-focused interfaces, and focused module boundaries. Remove unnecessary abstractions and verify behavior with focused tests.
 
 #### ephemeral-testing
 
