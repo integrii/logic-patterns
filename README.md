@@ -14,7 +14,7 @@ I think the future AI takes us to goes beyond coding and organizing our calendar
 
 ## Install plugin bundles
 
-The source catalog includes 19 skills in two Codex plugins. Release [1.0.5](https://github.com/integrii/logic-patterns/releases/tag/v1.0.5) contains 18 skills.
+Version [1.1.0](https://github.com/integrii/logic-patterns/releases/tag/v1.1.0) includes 19 skills in two Codex plugins:
 
 - `logic-patterns`: Generic problem-solving and reasoning workflows for technologists.
 - `development-patterns`: Effective engineering, execution, and implementation workflows.
