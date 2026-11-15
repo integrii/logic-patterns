@@ -25,7 +25,7 @@ Report the analyzer, metric variant, and measurement scope when reporting scores
 
 Keep functions small and focused. Prefer early returns over deep nesting. Reduce unnecessary branches and duplicated decisions. Do not split code into trivial helpers solely to improve scores.
 
-Write focused tests beside the code where project conventions support it. Assert observable behavior and meaningful failure cases. Use mocks at dependency boundaries when useful. Avoid tests that merely mirror the implementation or exist only to raise coverage.
+Use `development-patterns:practical-testing` when adding, changing, reviewing, or removing tests. Keep tests beside the code where project conventions support it.
 
 ## Interfaces and abstractions
 

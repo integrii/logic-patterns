@@ -1,7 +1,7 @@
 <div align="center">
   <img src="plugins/logic-patterns/logo.png" alt="logic-patterns logo" width="420"/>
   <br/>
-  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-19%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
+  <a href="https://skills.sh/integrii/logic-patterns"><img src="https://img.shields.io/badge/skills.sh-20%20skills-111827?labelColor=374151" alt="skills.sh"/></a>
 </div>
 
 # logic-patterns
@@ -106,6 +106,10 @@ Execute an active plan through focused tests, a completion ledger, local review,
 #### plan-checklists
 
 Track implementation work with concise Markdown checklists and the repository's storage policy. Keep PersonaStack plans in the workspace root `.plans/` tree and archive inactive plans promptly. Keep shipping procedures outside implementation plans.
+
+#### practical-testing
+
+Protect observable behavior in the cheapest sufficient test lane. Consolidate duplicate evidence while preserving distinct risks and keeping expensive tests explicit.
 
 #### spec-driven-development
 

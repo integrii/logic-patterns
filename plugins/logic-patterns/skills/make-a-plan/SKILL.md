@@ -73,7 +73,7 @@ For each phase, specify:
 - The canonical implementation path and any justified logic gate.
 - Any shared-contract closure order and mechanical check.
 - Explicit non-goals and later-phase dependencies.
-- Focused validation: the lowest-cost unit, store/command, registered-handler, client, or UI test that proves the behavior. Add stateful in-process workflows when behavior spans requests or mutations.
+- Focused validation: the lowest-cost unit, store/command, registered-handler, client, or UI test that proves the behavior. Add stateful in-process workflows when behavior spans requests or mutations. When available, use `development-patterns:practical-testing` for the test strategy.
 - Only applicable failure handling, authorization, migration code and tests, observability code, and documentation changes. Exclude operational migration, rollback, and rollout procedures.
 
 Keep API, browser, and service consumers in the same phase only when the journey needs all of them. Do not turn every future resource migration into a prerequisite for the first vertical slice.

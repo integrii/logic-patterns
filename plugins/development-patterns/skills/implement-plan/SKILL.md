@@ -43,7 +43,7 @@ After all preceding gates are green, archive the plan and complete the goal.
 For each independently testable slice:
 
 1. Implement the plan's selected canonical path. Keep minor variants as logic gates. Remove superseded behavior when safe.
-2. Add or update the smallest tests that prove the slice's observable contract. For a bug fix, add a regression before the fix when practical.
+2. Apply `development-patterns:practical-testing` to the slice's test coverage.
 3. Run focused validation and inspect authoritative readback for mutations.
 4. Record material evidence in the ledger. Do not repeat generic discovery or run final gates until all slice checks are green.
 

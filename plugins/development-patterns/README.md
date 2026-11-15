@@ -40,6 +40,10 @@ Execute an active plan through focused tests, a completion ledger, local review,
 
 Track implementation work with concise Markdown checklists and the repository's storage policy. Keep PersonaStack plans in the workspace root `.plans/` tree and archive inactive plans promptly. Keep shipping procedures outside implementation plans.
 
+### practical-testing
+
+Protect observable behavior in the cheapest sufficient test lane. Consolidate duplicate evidence while preserving distinct risks and keeping expensive tests explicit.
+
 ### spec-driven-development
 
 Define desired behavior, contracts, and implementation constraints in repository-local `SPEC.md`. Keep service specs aligned with accepted architecture and use them to guide implementation and validation.
