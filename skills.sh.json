@@ -17,22 +17,6 @@
         "multidimensional-planning",
         "session-review"
       ]
-    },
-    {
-      "title": "Development Patterns",
-      "description": "Engineering workflows for specs, architecture, plans, testing, and implementation.",
-      "skills": [
-        "architecture-decision-records",
-        "architecture-spec",
-        "centralized-fix-selection",
-        "code-simplicity",
-        "ephemeral-testing",
-        "github-release-builds",
-        "implement-plan",
-        "plan-checklists",
-        "practical-testing",
-        "spec-driven-development"
-      ]
     }
   ]
 }
